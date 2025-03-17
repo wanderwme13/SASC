@@ -2,6 +2,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("searchInput");
     const priceTableBody = document.querySelector("#priceTable tbody");
 
+    // Função para formatar valores em Reais (R$)
+    function formatarMoeda(valor) {
+        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
+    }
+
     // Carregar dados do JSON
     fetch('data.json')
         .then(response => response.json())
@@ -16,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     row.innerHTML = `
                         <td>${item.Código}</td>
                         <td>${item.Descrição}</td>
-                        <td>${item["MENOR VALOR"]}</td>
+                        <td>${formatarMoeda(item["MENOR VALOR"])}</td>
                         <td>${item["MENOR PREÇO"]}</td>
                         <td>${item.ATUALIZADO}</td>
                     `;
